@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_first_robot">
+
+    <xacro:property name="base_length" value="0.6"/>
+    <xacro:property name="base_width" value="0.4"/>
+    <xacro:property name="base_height" value="0.1"/>
+    <xacro:property name="base_mass" value="10.0"/>
+
+
+    <xacro:property name="wheel_radius" value="0.06"/>
+    <xacro:property name="wheel_width" value="0.04"/>
+    <xacro:property name="wheel_mass" value="2.0"/>
+
+
+    <xacro:property name="lidar_radius" value="0.04"/>
+    <xacro:property name="lidar_length" value="0.02"/>
+    <xacro:property name="lidar_mass" value="4.0"/>
+
+    <xacro:property name="caster_radius" value="0.04"/>
+    <xacro:property name="caster_mass" value="0.3"/>
+
+</robot>

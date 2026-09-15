@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<robot name="my_first_robot"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ================================================= -->
+    <!-- FRONT LEFT CASTER WHEEL -->
+    <!-- ================================================= -->
+
+    <link name="front_left_caster_wheel">
+
+        <visual>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+            <material name="Black"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="${caster_mass}"/>
+            <inertia
+                ixx="${2 * caster_mass * caster_radius**2 / 5}"
+                ixy="0"
+                ixz="0"
+                iyy="${2 * caster_mass * caster_radius**2 / 5}"
+                iyz="0"
+                izz="${2 * caster_mass * caster_radius**2 / 5}"/>
+        </inertial>
+
+    </link>
+
+    <joint name="front_left_caster_wheel_joint"
+           type="fixed">
+
+        <parent link="base_link"/>
+        <child link="front_left_caster_wheel"/>
+
+        <origin
+            xyz="0.25 0.11 -0.045"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ================================================= -->
+    <!-- FRONT RIGHT CASTER WHEEL -->
+    <!-- ================================================= -->
+
+    <link name="front_right_caster_wheel">
+
+        <visual>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+            <material name="Black"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="${caster_mass}"/>
+            <inertia
+                ixx="${2 * caster_mass * caster_radius**2 / 5}"
+                ixy="0"
+                ixz="0"
+                iyy="${2 * caster_mass * caster_radius**2 / 5}"
+                iyz="0"
+                izz="${2 * caster_mass * caster_radius**2 / 5}"/>
+        </inertial>
+
+    </link>
+
+    <joint name="front_right_caster_wheel_joint"
+           type="fixed">
+
+        <parent link="base_link"/>
+        <child link="front_right_caster_wheel"/>
+
+        <origin
+            xyz="0.25 -0.11 -0.045"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ================================================= -->
+    <!-- REAR LEFT CASTER WHEEL -->
+    <!-- ================================================= -->
+
+    <link name="rear_left_caster_wheel">
+
+        <visual>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+            <material name="Black"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="${caster_mass}"/>
+            <inertia
+                ixx="${2 * caster_mass * caster_radius**2 / 5}"
+                ixy="0"
+                ixz="0"
+                iyy="${2 * caster_mass * caster_radius**2 / 5}"
+                iyz="0"
+                izz="${2 * caster_mass * caster_radius**2 / 5}"/>
+        </inertial>
+
+    </link>
+
+    <joint name="rear_left_caster_wheel_joint"
+           type="fixed">
+
+        <parent link="base_link"/>
+        <child link="rear_left_caster_wheel"/>
+
+        <origin
+            xyz="-0.25 0.11 -0.045"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ================================================= -->
+    <!-- REAR RIGHT CASTER WHEEL -->
+    <!-- ================================================= -->
+
+    <link name="rear_right_caster_wheel">
+
+        <visual>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+            <material name="Black"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <sphere radius="${caster_radius}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="${caster_mass}"/>
+            <inertia
+                ixx="${2 * caster_mass * caster_radius**2 / 5}"
+                ixy="0"
+                ixz="0"
+                iyy="${2 * caster_mass * caster_radius**2 / 5}"
+                iyz="0"
+                izz="${2 * caster_mass * caster_radius**2 / 5}"/>
+        </inertial>
+
+    </link>
+
+    <joint name="rear_right_caster_wheel_joint"
+           type="fixed">
+
+        <parent link="base_link"/>
+        <child link="rear_right_caster_wheel"/>
+
+        <origin
+            xyz="-0.25 -0.11 -0.045"
+            rpy="0 0 0"/>
+
+    </joint>
+
+</robot>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot name="my_first_robot" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+
+    <!-- RIGHT REAR WHEEL -->
+    <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+            <material name="Black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="${wheel_mass}"/>
+            <inertia ixx="${wheel_mass * (3 * wheel_radius * wheel_radius + wheel_width * wheel_width) / 12}" ixy="0" ixz="0" 
+                     iyy="${wheel_mass * (3 * wheel_radius * wheel_radius + wheel_width * wheel_width) / 12}" iyz="0" 
+                     izz="${(wheel_mass * wheel_radius * wheel_radius) / 2}"/>
+        </inertial>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="0 0.17 -0.025" rpy="-1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- LEFT REAR WHEEL -->
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+            <material name="Black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="${wheel_mass}"/>
+            <inertia ixx="${wheel_mass * (3 * wheel_radius * wheel_radius + wheel_width * wheel_width) / 12}" ixy="0" ixz="0" 
+                     iyy="${wheel_mass * (3 * wheel_radius * wheel_radius + wheel_width * wheel_width) / 12}" iyz="0" 
+                     izz="${(wheel_mass * wheel_radius * wheel_radius) / 2}"/>
+        </inertial>
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="0 -0.17 -0.025" rpy="-1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+</robot>
