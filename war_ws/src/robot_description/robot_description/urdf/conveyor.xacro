@@ -1,0 +1,682 @@
+<?xml version="1.0"?>
+
+<robot name="conveyor"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ========================================================= -->
+    <!-- CONVEYOR PARAMETERS                                      -->
+    <!-- ========================================================= -->
+
+    <xacro:property name="conveyor_length" value="0.40"/>
+    <xacro:property name="conveyor_width" value="0.30"/>
+    <xacro:property name="conveyor_thickness" value="0.03"/>
+
+    <!-- Position above robot base -->
+    <xacro:property name="conveyor_z" value="0.10"/>
+
+
+    <!-- ========================================================= -->
+    <!-- ROLLER PARAMETERS                                        -->
+    <!-- ========================================================= -->
+
+    <xacro:property name="roller_radius" value="0.025"/>
+    <xacro:property name="roller_length"
+                    value="${conveyor_width}"/>
+
+
+    <!-- ========================================================= -->
+    <!-- SUPPORT PARAMETERS                                       -->
+    <!-- ========================================================= -->
+
+    <xacro:property name="frame_thickness" value="0.025"/>
+    <xacro:property name="frame_height" value="0.07"/>
+
+
+    <!-- ========================================================= -->
+    <!-- MOTOR PARAMETERS                                         -->
+    <!-- ========================================================= -->
+
+    <xacro:property name="motor_length" value="0.07"/>
+    <xacro:property name="motor_width" value="0.06"/>
+    <xacro:property name="motor_height" value="0.06"/>
+
+
+    <!-- ========================================================= -->
+    <!-- MAIN CONVEYOR FRAME                                      -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_frame">
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+
+            <geometry>
+                <box size="${conveyor_length}
+                           ${conveyor_width}
+                           ${conveyor_thickness}"/>
+            </geometry>
+
+            <material name="conveyor_frame_material">
+                <color rgba="0.05 0.05 0.05 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+
+            <geometry>
+                <box size="${conveyor_length}
+                           ${conveyor_width}
+                           ${conveyor_thickness}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+
+            <mass value="2.0"/>
+
+            <inertia
+                ixx="0.01"
+                ixy="0"
+                ixz="0"
+                iyy="0.01"
+                iyz="0"
+                izz="0.01"/>
+        </inertial>
+
+    </link>
+
+
+    <!-- ========================================================= -->
+    <!-- CONNECT CONVEYOR TO ROBOT BASE                           -->
+    <!-- ========================================================= -->
+
+    <joint name="conveyor_frame_joint" type="fixed">
+
+        <parent link="base_link"/>
+        <child link="conveyor_frame"/>
+
+        <origin xyz="-0.10 0 ${conveyor_z}"
+                rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- FRONT ROLLER                                             -->
+    <!-- ========================================================= -->
+
+    <link name="front_conveyor_roller">
+
+        <visual>
+
+            <!-- Cylinder axis along Y -->
+            <origin xyz="0 0 0"
+                    rpy="-1.5708 0 0"/>
+
+            <geometry>
+                <cylinder
+                    radius="${roller_radius}"
+                    length="${roller_length}"/>
+            </geometry>
+
+            <material name="front_roller_material">
+                <color rgba="0.15 0.15 0.15 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="-1.5708 0 0"/>
+
+            <geometry>
+                <cylinder
+                    radius="${roller_radius}"
+                    length="${roller_length}"/>
+            </geometry>
+
+        </collision>
+
+        <inertial>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <mass value="0.3"/>
+
+            <inertia
+                ixx="0.0001"
+                ixy="0"
+                ixz="0"
+                iyy="0.0001"
+                iyz="0"
+                izz="0.0001"/>
+
+        </inertial>
+
+    </link>
+
+
+    <joint name="front_conveyor_roller_joint"
+           type="continuous">
+
+        <parent link="conveyor_frame"/>
+        <child link="front_conveyor_roller"/>
+
+        <origin
+            xyz="${conveyor_length/2 - roller_radius}
+                 0
+                 ${conveyor_thickness/2 + roller_radius}"
+            rpy="0 0 0"/>
+
+        <axis xyz="0 1 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- REAR ROLLER                                              -->
+    <!-- ========================================================= -->
+
+    <link name="rear_conveyor_roller">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="-1.5708 0 0"/>
+
+            <geometry>
+                <cylinder
+                    radius="${roller_radius}"
+                    length="${roller_length}"/>
+            </geometry>
+
+            <material name="rear_roller_material">
+                <color rgba="0.15 0.15 0.15 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="-1.5708 0 0"/>
+
+            <geometry>
+                <cylinder
+                    radius="${roller_radius}"
+                    length="${roller_length}"/>
+            </geometry>
+
+        </collision>
+
+        <inertial>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <mass value="0.3"/>
+
+            <inertia
+                ixx="0.0001"
+                ixy="0"
+                ixz="0"
+                iyy="0.0001"
+                iyz="0"
+                izz="0.0001"/>
+
+        </inertial>
+
+    </link>
+
+
+    <joint name="rear_conveyor_roller_joint"
+           type="continuous">
+
+        <parent link="conveyor_frame"/>
+        <child link="rear_conveyor_roller"/>
+
+        <origin
+            xyz="${-conveyor_length/2 + roller_radius}
+                 0
+                 ${conveyor_thickness/2 + roller_radius}"
+            rpy="0 0 0"/>
+
+        <axis xyz="0 1 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- CONVEYOR BELT                                            -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_belt">
+
+        <visual>
+
+            <origin
+                xyz="0
+                     0
+                     ${conveyor_thickness/2 + roller_radius + 0.005}"
+                rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${conveyor_length - 0.02}
+                          ${conveyor_width - 0.01}
+                          0.015"/>
+            </geometry>
+
+            <material name="belt_material">
+                <color rgba="0.02 0.25 0.22 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin
+                xyz="0
+                     0
+                     ${conveyor_thickness/2 + roller_radius + 0.005}"
+                rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${conveyor_length - 0.02}
+                          ${conveyor_width - 0.01}
+                          0.015"/>
+            </geometry>
+
+        </collision>
+
+    </link>
+
+
+    <joint name="conveyor_belt_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_belt"/>
+
+        <origin xyz="0 0 0"
+                rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- LEFT SIDE SUPPORT                                        -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_left_support">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${conveyor_length}
+                          ${frame_thickness}
+                          ${frame_height}"/>
+            </geometry>
+
+            <material name="left_support_material">
+                <color rgba="0.03 0.03 0.03 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${conveyor_length}
+                          ${frame_thickness}
+                          ${frame_height}"/>
+            </geometry>
+
+        </collision>
+
+        <inertial>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <mass value="0.5"/>
+
+            <inertia
+                ixx="0.001"
+                ixy="0"
+                ixz="0"
+                iyy="0.001"
+                iyz="0"
+                izz="0.001"/>
+
+        </inertial>
+
+    </link>
+
+
+    <joint name="conveyor_left_support_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_left_support"/>
+
+        <origin
+            xyz="0
+                 ${conveyor_width/2 + frame_thickness/2}
+                 ${frame_height/2}"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- RIGHT SIDE SUPPORT                                       -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_right_support">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${conveyor_length}
+                          ${frame_thickness}
+                          ${frame_height}"/>
+            </geometry>
+
+            <material name="right_support_material">
+                <color rgba="0.03 0.03 0.03 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${conveyor_length}
+                          ${frame_thickness}
+                          ${frame_height}"/>
+            </geometry>
+
+        </collision>
+
+        <inertial>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <mass value="0.5"/>
+
+            <inertia
+                ixx="0.001"
+                ixy="0"
+                ixz="0"
+                iyy="0.001"
+                iyz="0"
+                izz="0.001"/>
+
+        </inertial>
+
+    </link>
+
+
+    <joint name="conveyor_right_support_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_right_support"/>
+
+        <origin
+            xyz="0
+                 ${-(conveyor_width/2 + frame_thickness/2)}
+                 ${frame_height/2}"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- FRONT LEFT MOTOR                                         -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_front_left_motor">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+            <material name="front_left_motor_material">
+                <color rgba="0.25 0.25 0.25 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+        </collision>
+
+    </link>
+
+
+    <joint name="conveyor_front_left_motor_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_front_left_motor"/>
+
+        <origin
+            xyz="${conveyor_length/2 - 0.08}
+                 ${-(conveyor_width/2 + motor_width/2)}
+                 -${motor_height/2 + conveyor_thickness/2}"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- FRONT RIGHT MOTOR                                        -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_front_right_motor">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+            <material name="front_right_motor_material">
+                <color rgba="0.25 0.25 0.25 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+        </collision>
+
+    </link>
+
+
+    <joint name="conveyor_front_right_motor_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_front_right_motor"/>
+
+        <origin
+            xyz="${conveyor_length/2 - 0.08}
+                 ${conveyor_width/2 + motor_width/2}
+                 -${motor_height/2 + conveyor_thickness/2}"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- REAR LEFT MOTOR                                          -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_rear_left_motor">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+            <material name="rear_left_motor_material">
+                <color rgba="0.25 0.25 0.25 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+        </collision>
+
+    </link>
+
+
+    <joint name="conveyor_rear_left_motor_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_rear_left_motor"/>
+
+        <origin
+            xyz="${-conveyor_length/2 + 0.08}
+                 ${-(conveyor_width/2 + motor_width/2)}
+                 -${motor_height/2 + conveyor_thickness/2}"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ========================================================= -->
+    <!-- REAR RIGHT MOTOR                                         -->
+    <!-- ========================================================= -->
+
+    <link name="conveyor_rear_right_motor">
+
+        <visual>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+            <material name="rear_right_motor_material">
+                <color rgba="0.25 0.25 0.25 1"/>
+            </material>
+
+        </visual>
+
+        <collision>
+
+            <origin xyz="0 0 0"
+                    rpy="0 0 0"/>
+
+            <geometry>
+                <box
+                    size="${motor_length}
+                          ${motor_width}
+                          ${motor_height}"/>
+            </geometry>
+
+        </collision>
+
+    </link>
+
+
+    <joint name="conveyor_rear_right_motor_joint"
+           type="fixed">
+
+        <parent link="conveyor_frame"/>
+        <child link="conveyor_rear_right_motor"/>
+
+        <origin
+            xyz="${-conveyor_length/2 + 0.08}
+                 ${conveyor_width/2 + motor_width/2}
+                 -${motor_height/2 + conveyor_thickness/2}"
+            rpy="0 0 0"/>
+
+    </joint>
+
+
+</robot>

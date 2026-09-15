@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_first_robot">
+
+    <xacro:include filename="$(find robot_description)/urdf/properties.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/base.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/lidar.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/caster.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/wheel.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/materials.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/gazebo.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/conveyor.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/ros2_control.xacro"/>
+    
+</robot>
