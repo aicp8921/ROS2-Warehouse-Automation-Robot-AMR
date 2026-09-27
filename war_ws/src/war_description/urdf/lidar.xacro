@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="war_robot">
+
+    <link name="lidar_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+            </geometry>
+            <material name="Blue"/>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="${lidar_mass}"/>
+            <inertia 
+                ixx="${lidar_mass * (3 * lidar_radius**2 + lidar_length**2) / 12}" 
+                ixy="0.0" 
+                ixz="0.0" 
+                iyy="${lidar_mass * (3 * lidar_radius**2 + lidar_length**2) / 12}" 
+                iyz="0.0" 
+                izz="${(lidar_mass * lidar_radius**2) / 2}"/>
+        </inertial>
+    </link>    
+
+    <joint name="lidar_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="lidar_link"/>
+        <!-- Mounted forward at front bumper edge, top surface of base -->
+        <origin xyz="0.25 0 ${base_height/2 + lidar_length/2}" rpy="0 0 0"/>
+    </joint>
+
+</robot>

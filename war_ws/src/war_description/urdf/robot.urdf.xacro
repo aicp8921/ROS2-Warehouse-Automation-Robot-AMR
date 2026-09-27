@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="war_robot">
+
+    <!-- Global Properties & Materials -->
+    <xacro:include filename="$(find war_description)/urdf/properties.xacro"/>
+    <xacro:include filename="$(find war_description)/urdf/materials.xacro"/>
+
+    <!-- Core Chassis & Kinematics -->
+    <xacro:include filename="$(find war_description)/urdf/base.xacro"/>
+    <xacro:include filename="$(find war_description)/urdf/wheel.xacro"/>
+    <xacro:include filename="$(find war_description)/urdf/caster.xacro"/>
+
+    <!-- Payload & Sensors -->
+    <xacro:include filename="$(find war_description)/urdf/conveyor.xacro"/>
+    <xacro:include filename="$(find war_description)/urdf/lidar.xacro"/>
+
+    <!-- Gazebo Simulation & ros2_control -->
+    <xacro:include filename="$(find war_description)/urdf/gazebo.xacro"/>
+    <xacro:include filename="$(find war_description)/urdf/ros2_control.xacro"/>
+
+</robot>
