@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+
+    <world name="my_world">
+        
+        <!-- ROS plugins -->
+        <plugin name="gazebo_ros_api_plugin" filename="libgazebo_ros_api_plugin.so"/>
+        <plugin name="gazebo_ros_factory" filename="libgazebo_ros_factory.so"/>
+
+        <!-- Ground -->
+        <include>
+            <uri>model://ground_plane</uri>
+        </include>
+
+        <!-- Sun -->
+        <include>
+            <uri>model://sun</uri>
+        </include>
+
+        <!-- ============= NORTH WALL ===============-->
+        <model name="north_wall">
+            <static>true</static>
+            <pose>0 2.5 0.5 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>5 0.1 1</size>
+                        </box>
+                    </geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry>      
+                        <box>
+                            <size>5 0.1 1</size>
+                        </box>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <!-- ============= SOUTH WALL ===============-->
+        <model name="south_wall">
+            <static>true</static>
+            <pose>0 -2.5 0.5 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>5 0.1 1</size>
+                        </box>
+                    </geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry>      
+                        <box>
+                            <size>5 0.1 1</size>
+                        </box>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <!-- ============= EAST WALL ===============-->
+        <model name="east_wall">
+            <static>true</static>
+            <pose>2.5 0 0.5 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>0.1 5 1</size>
+                        </box>
+                    </geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry>      
+                        <box>
+                            <size>0.1 5 1</size>
+                        </box>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <!-- ============= WEST WALL ===============-->
+        <model name="west_wall">
+            <static>true</static>
+            <pose>-2.5 0 0.5 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>0.1 5 1</size>
+                        </box>
+                    </geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry>      
+                        <box>
+                            <size>0.1 5 1</size>
+                        </box>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+    </world>
+</sdf>
