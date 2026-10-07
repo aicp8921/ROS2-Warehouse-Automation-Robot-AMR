@@ -70,7 +70,7 @@
         </inertial>
     </link>
 
-    <joint name="front_conveyor_roller_joint" type="continuous">
+    <joint name="front_conveyor_roller_joint" type="fixed">
         <parent link="conveyor_frame"/>
         <child link="front_conveyor_roller"/>
         <origin xyz="${conveyor_length/2 - roller_radius} 0 ${conveyor_thickness/2 + roller_radius}" rpy="0 0 0"/>
@@ -99,7 +99,7 @@
         </inertial>
     </link>
 
-    <joint name="rear_conveyor_roller_joint" type="continuous">
+    <joint name="rear_conveyor_roller_joint" type="fixed">
         <parent link="conveyor_frame"/>
         <child link="rear_conveyor_roller"/>
         <origin xyz="${-conveyor_length/2 + roller_radius} 0 ${conveyor_thickness/2 + roller_radius}" rpy="0 0 0"/>
